@@ -1,49 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
 
+    [SerializeField] private SpriteRenderer playerSpriteRenderer;
+    [SerializeField] private Animator playerAnimator;
     [SerializeField] private float HorizontalMovementSpeed = 2f;    
     bool IsGoingRight = false;
     bool IsGoingLeft = false;
+    bool melee = false;
 
-
+    void Start()
+    {
+        playerAnimator = GetComponent<Animator>();
+    }
     void Update()
     {
         GetInputs();
+        DirectionArranger();
+        AnimationArranger();
+        HorizontalMovement();
     }
 
     void FixedUpdate()
     {
-        HorizontalMovement();
+       // HorizontalMovement();
         
     }
 
     private void GetInputs()
     {
-        /*
-        if (Input.GetAxis("Horizontal") > 0)
+        
+        if (Input.GetKey(KeyCode.E))
         {
-            IsGoingRight = true;
-            IsGoingLeft = false;
+            melee = true;
         }
-
-        if (Input.GetAxis("Horizontal") < 0)
+        if (Input.GetKeyUp(KeyCode.E))
         {
-            IsGoingLeft = true;
-            IsGoingRight = false;
+            melee = false;
         }
-
-        if (Input.GetAxis("Horizontal") == 0 )
-        {
-            IsGoingLeft = false;
-            IsGoingRight = false;
-        }
-        */
-
-
         if (Input.GetKeyDown(KeyCode.A)  || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             IsGoingLeft = true;
@@ -69,17 +67,46 @@ public class PlayerController : MonoBehaviour
 
         if (IsGoingRight)
         {
-            transform.Translate(HorizontalMovementSpeed * Time.fixedDeltaTime ,0, 0);
+            transform.Translate(HorizontalMovementSpeed * Time.deltaTime ,0, 0);
         }
         if (IsGoingLeft)
         {
-            transform.Translate(-HorizontalMovementSpeed * Time.fixedDeltaTime,0, 0);
+            transform.Translate(-HorizontalMovementSpeed * Time.deltaTime,0, 0);
         }
 
     }
 
+    private void AnimationArranger()
+    {
+        if (melee)
+        {
+            playerAnimator.SetBool("Melee", true);
+            
+        }
+        else
+        {
+            playerAnimator.SetBool("Melee", false);
+        }
+        if (IsGoingLeft || IsGoingRight)
+        {
+            playerAnimator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("IsRunning", false);
+        }
+    }
+    
     private void DirectionArranger()
     {
-        
+        if (IsGoingRight & playerSpriteRenderer.flipX == true)
+        {
+            playerSpriteRenderer.flipX = false;
+        }
+        if (IsGoingLeft & playerSpriteRenderer.flipX == false)
+        {
+            playerSpriteRenderer.flipX = true;
+        }
     }
+    
 }
