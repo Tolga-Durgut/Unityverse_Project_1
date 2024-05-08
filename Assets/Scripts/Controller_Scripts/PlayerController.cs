@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     [SerializeField] private float HorizontalMovementSpeed = 2f;    
     bool IsGoingRight = false;
     bool IsGoingLeft = false;
+
 
     void Update()
     {
@@ -16,6 +18,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         HorizontalMovement();
+        
     }
 
     private void GetInputs()
@@ -73,5 +76,10 @@ public class PlayerController : MonoBehaviour
             transform.Translate(-HorizontalMovementSpeed * Time.fixedDeltaTime,0, 0);
         }
 
+    }
+
+    private void DirectionArranger()
+    {
+        
     }
 }
