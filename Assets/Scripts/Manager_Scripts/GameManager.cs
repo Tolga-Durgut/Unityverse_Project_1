@@ -18,10 +18,28 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
+    private PlayerController mainPlayer;
+
+
+
     void Start()
     {
         UIManager.Instance.DebugMethod();
         
+    }
+
+    public void StartGame()
+    {
+
+    }
+
+    public void RegisterMainPlayer( PlayerController playerToRegister)
+    {
+        mainPlayer = null;
+
+        mainPlayer = playerToRegister;
+
     }
 
    
