@@ -15,16 +15,21 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] LayerMask groundLayer;
     [SerializeField] private float groundCheckColliderRatio = 0.1f;
+
+    
+    [SerializeField]private int availableJumps = 2;
     bool IsGoingRight = false;
     bool IsGoingLeft = false;
     [SerializeField] bool IsGrounded = false;
     bool melee = false;
     bool jump = false;
+    bool doubleJump = false;
 
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+       
     }
     void Update()
     {
@@ -57,10 +62,7 @@ public class PlayerController : MonoBehaviour
         {
             jump = true;
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            jump = false;
-        }
+        
         if (Input.GetKeyDown(KeyCode.A)  || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             IsGoingLeft = true;
@@ -90,6 +92,7 @@ public class PlayerController : MonoBehaviour
         if (collider2D.Length > 0 )
         {
             IsGrounded = true;
+
         }
     }
 
@@ -109,22 +112,48 @@ public class PlayerController : MonoBehaviour
 
     private void JumpMovement()
     {
-        if (IsGrounded && jump)
+        if(!jump && IsGrounded)
         {
-            rb.AddForce(new Vector2(0f,jumpPower));
+            availableJumps = 2;
+        }
+        else if (jump)
+        {
+            
+            if (IsGrounded && availableJumps == 2)
+            {
+                rb.velocity = Vector2.up * jumpPower;
+                doubleJump = true;
+                availableJumps--;
+                
+            }
+            else if (!IsGrounded && availableJumps == 2)
+            {
+                rb.velocity = Vector2.up * jumpPower;
+                doubleJump = false;
+                availableJumps = 0;
+                
+            }
+            else if (doubleJump)
+            {
+                rb.velocity = Vector2.up * jumpPower;
+                doubleJump = false;  
+                availableJumps--;
+
+
+            }
+            
+            
+            jump = false;
         }
     }
 
     private void AnimationArranger()
     {
-        if (jump && IsGrounded)
-        {
-            playerAnimator.SetBool("IsJumping", true);
-        }
-        else if(!jump && IsGrounded)
-        {
-            playerAnimator.SetBool("IsJumping",false);
-        }
+        
+        playerAnimator.SetBool("IsJumping", !IsGrounded);
+        playerAnimator.SetFloat("yVelocity", rb.velocity.y);
+    
+
         if (melee)
         {
             playerAnimator.SetBool("Melee", true);

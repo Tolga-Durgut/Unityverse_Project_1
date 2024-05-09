@@ -6598,12 +6598,13 @@ MonoBehaviour:
   playerSpriteRenderer: {fileID: 1005010093}
   rb: {fileID: 1005010094}
   HorizontalMovementSpeed: 8
-  jumpPower: 150
+  jumpPower: 6
   groundCheckCollider: {fileID: 442333187}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   groundCheckColliderRatio: 0.05
+  availableJumps: 2
   IsGrounded: 0
 --- !u!212 &1005010093
 SpriteRenderer:
@@ -6737,7 +6738,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.018506527, y: 0.09253132}
+  m_Offset: {x: -0.011113167, y: 0.09253132}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -6748,7 +6749,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.77858734, y: 0.8243563}
+  m_Size: {x: 0.43849373, y: 0.8243563}
   m_EdgeRadius: 0
 --- !u!1 &1105910373
 GameObject:
