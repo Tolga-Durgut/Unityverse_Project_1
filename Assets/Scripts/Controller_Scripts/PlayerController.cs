@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     bool IsGoingRight = false;
     bool IsGoingLeft = false;
     bool melee = false;
+    bool jump = false;
 
     void Start()
     {
@@ -41,6 +42,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.E))
         {
             melee = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            jump = true;
         }
         if (Input.GetKeyDown(KeyCode.A)  || Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -78,6 +83,10 @@ public class PlayerController : MonoBehaviour
 
     private void AnimationArranger()
     {
+        if (jump)
+        {
+            playerAnimator.SetBool("IsJumping", true);
+        }
         if (melee)
         {
             playerAnimator.SetBool("Melee", true);
