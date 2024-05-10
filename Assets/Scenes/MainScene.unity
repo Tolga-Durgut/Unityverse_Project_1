@@ -10960,7 +10960,7 @@ GameObject:
   - component: {fileID: 1005010096}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11007,6 +11007,7 @@ MonoBehaviour:
   groundCheckColliderRatio: 0.05
   availableJumps: 2
   IsGrounded: 0
+  sword: {fileID: 3146340827096393095, guid: e55dd57c4594a468fa26ff653b6bf0ab, type: 3}
   dust: {fileID: 5901265976185265791, guid: c718616f72d394798ab497f1ad44a8bd, type: 3}
 --- !u!212 &1005010093
 SpriteRenderer:
@@ -11076,7 +11077,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 0f5264a2aad034d73a9170b4df2a513d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -11140,7 +11141,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011113167, y: 0.09253132}
+  m_Offset: {x: -0.007942438, y: 0.08785248}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -11151,7 +11152,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.43849373, y: 0.8243563}
+  m_Size: {x: 0.4909587, y: 0.8220887}
   m_EdgeRadius: 0
 --- !u!1 &1105910373
 GameObject:

@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
     private Animator playerAnimator;
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] public Rigidbody2D rb;
     [SerializeField] private float HorizontalMovementSpeed = 2f;
     [SerializeField] private float jumpPower = 500f;      
     [SerializeField] private Transform groundCheckCollider;
@@ -18,12 +18,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] private float groundCheckColliderRatio = 0.1f;
 
-    
     [SerializeField]private int availableJumps = 2;
-    bool IsGoingRight = false;
-    bool IsGoingLeft = false;
     [SerializeField] bool IsGrounded = false;
+    [SerializeField] GameObject sword;
+
+    bool isGoingRight = false;
+    
+    bool isGoingLeft = false;
+   
+    bool swordControllerSwordDirection;
+
+    public bool SwordControllerSwordDirection
+    {
+        get{ return swordControllerSwordDirection; }
+    }
+
     bool melee = false;
+    bool throwSword;
     bool jump = false;
     bool doubleJump = false;
 
@@ -38,7 +49,9 @@ public class PlayerController : MonoBehaviour
     {
         GetInputs();
         DirectionArranger();
+        //ThrowSword();
         AnimationArranger();
+        
         
     }
 
@@ -61,6 +74,12 @@ public class PlayerController : MonoBehaviour
         {
             melee = false;
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            throwSword = true;
+        }
+       
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jump = true;
@@ -68,20 +87,20 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.A)  || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            IsGoingLeft = true;
+            isGoingLeft = true;
         }
         if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            IsGoingLeft = false;
+            isGoingLeft = false;
         }
 
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            IsGoingRight = true;
+            isGoingRight = true;
         }
         if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
         {
-            IsGoingRight = false;
+            isGoingRight = false;
         }
 
     }
@@ -102,11 +121,11 @@ public class PlayerController : MonoBehaviour
     private void HorizontalMovement()
     {
 
-        if (IsGoingRight)
+        if (isGoingRight)
         {
             transform.Translate(HorizontalMovementSpeed * Time.fixedDeltaTime ,0, 0);
         }
-        if (IsGoingLeft)
+        if (isGoingLeft)
         {
             transform.Translate(-HorizontalMovementSpeed * Time.fixedDeltaTime,0, 0);
         }
@@ -160,7 +179,21 @@ public class PlayerController : MonoBehaviour
 
     }
    
-    
+    public void ThrowSword()
+    {
+        if (throwSword )
+        {
+            Instantiate(sword,transform.position,quaternion.identity);
+            
+        }
+        
+    }
+    public void EndThrowSword()
+    {
+        throwSword = false;
+        Debug.Log("Workingggggggggg");
+    }
+
 
     private void AnimationArranger()
     {
@@ -168,7 +201,9 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("IsJumping", !IsGrounded);
         playerAnimator.SetFloat("yVelocity", rb.velocity.y);
     
-
+        
+        playerAnimator.SetBool("ThrowSword",throwSword);
+        
         if (melee)
         {
             playerAnimator.SetBool("Melee", true);
@@ -178,7 +213,7 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetBool("Melee", false);
         }
-        if (IsGoingLeft || IsGoingRight)
+        if (isGoingLeft || isGoingRight)
         {
             playerAnimator.SetBool("IsRunning", true);
         }
@@ -190,14 +225,17 @@ public class PlayerController : MonoBehaviour
     
     private void DirectionArranger()
     {
-        if (IsGoingRight & playerSpriteRenderer.flipX == true)
+        if (isGoingRight & playerSpriteRenderer.flipX == true)
         {
             playerSpriteRenderer.flipX = false;
+            
         }
-        if (IsGoingLeft & playerSpriteRenderer.flipX == false)
+        if (isGoingLeft & playerSpriteRenderer.flipX == false)
         {
             playerSpriteRenderer.flipX = true;
         }
+
+        swordControllerSwordDirection = playerSpriteRenderer.flipX;
     }
     
 }
