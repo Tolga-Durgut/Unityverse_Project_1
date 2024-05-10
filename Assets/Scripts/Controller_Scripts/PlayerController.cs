@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float HorizontalMovementSpeed = 2f;
     [SerializeField] private float jumpPower = 500f;      
     [SerializeField] private Transform groundCheckCollider;
+    [SerializeField] private Transform jumpDustPos;
 
     [SerializeField] LayerMask groundLayer;
     [SerializeField] private float groundCheckColliderRatio = 0.1f;
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
     bool jump = false;
     bool doubleJump = false;
 
+    [SerializeField] private GameObject dust;
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
@@ -124,6 +127,7 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = Vector2.up * jumpPower;
                 doubleJump = true;
                 availableJumps--;
+                JumpDustAnim();
                 
             }
             else if (!IsGrounded && availableJumps == 2)
@@ -131,6 +135,7 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = Vector2.up * jumpPower;
                 doubleJump = false;
                 availableJumps = 0;
+                JumpDustAnim();
                 
             }
             else if (doubleJump)
@@ -138,6 +143,7 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = Vector2.up * jumpPower;
                 doubleJump = false;  
                 availableJumps--;
+                JumpDustAnim();
 
 
             }
@@ -146,6 +152,15 @@ public class PlayerController : MonoBehaviour
             jump = false;
         }
     }
+
+    private void JumpDustAnim()
+    {
+        
+        Instantiate( dust, (Vector3) jumpDustPos.position,quaternion.identity);
+
+    }
+   
+    
 
     private void AnimationArranger()
     {
