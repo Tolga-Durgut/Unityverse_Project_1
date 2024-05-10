@@ -8,6 +8,7 @@ public class SwordController : MonoBehaviour
 {
     Rigidbody2D rb;
     PlayerController playerController;
+    Rigidbody2D playerRb;
     GameObject player;
     bool movementFlag = true;
     [SerializeField] private float throwForce = 7;
@@ -19,6 +20,7 @@ public class SwordController : MonoBehaviour
         player = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();   
         playerController = player.GetComponent<PlayerController>();
+        playerRb = player.GetComponent<Rigidbody2D>();
         
     }
 
@@ -28,7 +30,7 @@ public class SwordController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.gameObject.tag != "Player")
+        if (other.gameObject.tag != "Player"   && other.gameObject.tag != "Sword")
         {
             Destroy(this.gameObject);
         }
@@ -38,16 +40,21 @@ public class SwordController : MonoBehaviour
     {
         if (movementFlag)
         {
+
             movementFlag = false;
             if (playerController.SwordControllerSwordDirection == true)
             {
-                rb.velocity = Vector2.left * throwForce;
+                
+                rb.velocity = Vector2.left * (throwForce + playerRb.velocity.x) ;
             }
             else if (playerController.SwordControllerSwordDirection == false)
             {
-                rb.velocity = Vector2.right * throwForce;
+                rb.velocity = Vector2.right * (throwForce + playerRb.velocity.x) ;
             }
-            
+
+            Debug.Log(throwForce);
+            Debug.Log(playerRb.velocity.x);
+
         }
     }
 
