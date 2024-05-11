@@ -8,6 +8,11 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
+
+    public SpriteRenderer PlayerSpriteRenderer
+    {
+        get { return playerSpriteRenderer; }
+    }
     [SerializeField] public Rigidbody2D rb;
     [SerializeField] private float HorizontalMovementSpeed = 2f;
     [SerializeField] private float jumpPower = 500f;      
@@ -20,18 +25,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private int availableJumps = 2;
     [SerializeField] bool IsGrounded = false;
     [SerializeField] GameObject sword;
+    [SerializeField] float horizontalSpeed = 5f;
     private Animator playerAnimator;
 
-    bool isGoingRight = false;
-    
-    bool isGoingLeft = false;
-   
-    bool swordControllerSwordDirection;
-
-    public bool SwordControllerSwordDirection
-    {
-        get{ return swordControllerSwordDirection; }
-    }
+    bool facingRight = true;
+    float horizontalValue;
 
     bool melee = false;
     bool throwSword;
@@ -56,6 +54,8 @@ public class PlayerController : MonoBehaviour
             AnimationArranger();
 
         }
+
+        
         
         
     }
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         if (isAlive)
         {
             GroundChecker();
-            HorizontalMovement();
+            HorizontalMovement(horizontalValue);
             JumpMovement();
             
         }
@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
 
     private void GetInputs()
     {
+
+        horizontalValue = Input.GetAxisRaw("Horizontal");
         //deneme scripti/////////
         if (Input.GetKey(KeyCode.H))
         {
@@ -88,7 +90,7 @@ public class PlayerController : MonoBehaviour
         {
             melee = false;
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             throwSword = true;
         }
@@ -99,23 +101,7 @@ public class PlayerController : MonoBehaviour
             jump = true;
         }
         
-        if (Input.GetKeyDown(KeyCode.A)  || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            isGoingLeft = true;
-        }
-        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            isGoingLeft = false;
-        }
 
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            isGoingRight = true;
-        }
-        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            isGoingRight = false;
-        }
 
     }
 
@@ -132,17 +118,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HorizontalMovement()
+    private void HorizontalMovement(float dir)
     {
+        float xVal = dir * horizontalSpeed *100* Time.fixedDeltaTime;
+        Vector2 targetVelocity = new Vector2(xVal,rb.velocity.y);
+        rb.velocity = targetVelocity;
 
-        if (isGoingRight)
-        {
-            transform.Translate(HorizontalMovementSpeed * Time.fixedDeltaTime ,0, 0);
-        }
-        if (isGoingLeft)
-        {
-            transform.Translate(-HorizontalMovementSpeed * Time.fixedDeltaTime,0, 0);
-        }
 
     }
 
@@ -227,7 +208,7 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetBool("Melee", false);
         }
-        if (isGoingLeft || isGoingRight)
+        if (horizontalValue != 0)
         {
             playerAnimator.SetBool("IsRunning", true);
         }
@@ -239,17 +220,20 @@ public class PlayerController : MonoBehaviour
     
     private void DirectionArranger()
     {
-        if (isGoingRight & playerSpriteRenderer.flipX == true)
-        {
-            playerSpriteRenderer.flipX = false;
-            
-        }
-        if (isGoingLeft & playerSpriteRenderer.flipX == false)
+        if (facingRight & horizontalValue < 0)
         {
             playerSpriteRenderer.flipX = true;
+            facingRight = false;
+           
+        }
+        else if (!facingRight & horizontalValue > 0)
+        {
+            playerSpriteRenderer.flipX = false;
+            facingRight = true;
+            
         }
 
-        swordControllerSwordDirection = playerSpriteRenderer.flipX;
+        
     }
 
     private void Death()

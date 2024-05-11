@@ -12,7 +12,7 @@ public class SwordController : MonoBehaviour
     Rigidbody2D playerRb;
     GameObject player;
     bool movementFlag = true;
-    [SerializeField] private float throwForce = 7;
+    [SerializeField] private float throwForce = 6;
 
 
 
@@ -43,20 +43,17 @@ public class SwordController : MonoBehaviour
         {
 
             movementFlag = false;
-            if (playerController.SwordControllerSwordDirection == true)
+            if (playerController.PlayerSpriteRenderer.flipX == false)
             {
                 
-                rb.velocity = Vector2.left * (throwForce + playerRb.velocity.x) ;
+                rb.velocity = Vector2.right * throwForce *100* Time.fixedDeltaTime ;
+            }
+            else
+            {
+                rb.velocity = Vector2.left * throwForce *100* Time.fixedDeltaTime;
                 spriteRenderer.flipX = true;
             }
-            else if (playerController.SwordControllerSwordDirection == false)
-            {
-                rb.velocity = Vector2.right * (throwForce + playerRb.velocity.x) ;
-                spriteRenderer.flipX = false;
-            }
 
-            Debug.Log(throwForce);
-            Debug.Log(playerRb.velocity.x);
 
         }
     }
