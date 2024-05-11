@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
-    private Animator playerAnimator;
     [SerializeField] public Rigidbody2D rb;
     [SerializeField] private float HorizontalMovementSpeed = 2f;
     [SerializeField] private float jumpPower = 500f;      
@@ -21,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private int availableJumps = 2;
     [SerializeField] bool IsGrounded = false;
     [SerializeField] GameObject sword;
+    private Animator playerAnimator;
 
     bool isGoingRight = false;
     
@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     bool throwSword;
     bool jump = false;
     bool doubleJump = false;
+    bool isAlive = true;
 
     [SerializeField] private GameObject dust;
     void Start()
@@ -47,25 +48,38 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        GetInputs();
-        DirectionArranger();
-        //ThrowSword();
-        AnimationArranger();
+        if (isAlive)
+        {
+
+            GetInputs();
+            DirectionArranger();
+            AnimationArranger();
+
+        }
         
         
     }
 
     void FixedUpdate()
     {
-        GroundChecker();
-        HorizontalMovement();
-        JumpMovement();
+        if (isAlive)
+        {
+            GroundChecker();
+            HorizontalMovement();
+            JumpMovement();
+            
+        }
         
     }
 
     private void GetInputs()
     {
-        
+        //deneme scripti/////////
+        if (Input.GetKey(KeyCode.H))
+        {
+            isAlive = false;
+        }
+        ////////////////////////
         if (Input.GetKey(KeyCode.E))
         {
             melee = true;
@@ -191,13 +205,13 @@ public class PlayerController : MonoBehaviour
     public void EndThrowSword()
     {
         throwSword = false;
-        Debug.Log("Workingggggggggg");
+        
     }
 
 
     private void AnimationArranger()
     {
-        
+        playerAnimator.SetBool("IsAlive",isAlive);
         playerAnimator.SetBool("IsJumping", !IsGrounded);
         playerAnimator.SetFloat("yVelocity", rb.velocity.y);
     
@@ -236,6 +250,11 @@ public class PlayerController : MonoBehaviour
         }
 
         swordControllerSwordDirection = playerSpriteRenderer.flipX;
+    }
+
+    private void Death()
+    {
+        isAlive = false;
     }
     
 }

@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public class SwordController : MonoBehaviour
 {
     Rigidbody2D rb;
+    SpriteRenderer spriteRenderer;
     PlayerController playerController;
     Rigidbody2D playerRb;
     GameObject player;
@@ -21,7 +22,7 @@ public class SwordController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();   
         playerController = player.GetComponent<PlayerController>();
         playerRb = player.GetComponent<Rigidbody2D>();
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
@@ -30,7 +31,7 @@ public class SwordController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.gameObject.tag != "Player"   && other.gameObject.tag != "Sword")
+        if (other.gameObject.tag != "Player"   &&  other.gameObject.tag != "Sword")
         {
             Destroy(this.gameObject);
         }
@@ -46,10 +47,12 @@ public class SwordController : MonoBehaviour
             {
                 
                 rb.velocity = Vector2.left * (throwForce + playerRb.velocity.x) ;
+                spriteRenderer.flipX = true;
             }
             else if (playerController.SwordControllerSwordDirection == false)
             {
                 rb.velocity = Vector2.right * (throwForce + playerRb.velocity.x) ;
+                spriteRenderer.flipX = false;
             }
 
             Debug.Log(throwForce);
