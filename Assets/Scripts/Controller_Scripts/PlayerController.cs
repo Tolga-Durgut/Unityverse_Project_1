@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
         get { return playerSpriteRenderer; }
     }
     [SerializeField] public Rigidbody2D rb;
-    [SerializeField] private float HorizontalMovementSpeed = 2f;
+    
     [SerializeField] private float jumpPower = 500f;      
     [SerializeField] private Transform groundCheckCollider;
     [SerializeField] private Transform jumpDustPos;
@@ -36,8 +36,12 @@ public class PlayerController : MonoBehaviour
     bool jump = false;
     bool doubleJump = false;
     bool isAlive = true;
+    Vector3 landDustPos;
+    [SerializeField]bool makeDust;
+
 
     [SerializeField] private GameObject dust;
+    [SerializeField] private GameObject land;
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
@@ -52,10 +56,10 @@ public class PlayerController : MonoBehaviour
             GetInputs();
             DirectionArranger();
             AnimationArranger();
+            
 
         }
 
-        
         
         
     }
@@ -67,6 +71,7 @@ public class PlayerController : MonoBehaviour
             GroundChecker();
             HorizontalMovement(horizontalValue);
             JumpMovement();
+            LandDustAnim();
             
         }
         
@@ -77,16 +82,16 @@ public class PlayerController : MonoBehaviour
 
         horizontalValue = Input.GetAxisRaw("Horizontal");
         //deneme scripti/////////
-        if (Input.GetKey(KeyCode.H))
-        {
-            isAlive = false;
-        }
+        //if (Input.GetKey(KeyCode.Y))
+        //{
+        //    isAlive = false;
+        //}
         ////////////////////////
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.K))
         {
             melee = true;
         }
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.K))
         {
             melee = false;
         }
@@ -157,8 +162,8 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = Vector2.up * jumpPower;
                 doubleJump = false;  
                 availableJumps--;
+                
                 JumpDustAnim();
-
 
             }
             
@@ -173,7 +178,24 @@ public class PlayerController : MonoBehaviour
         Instantiate( dust, (Vector3) jumpDustPos.position,quaternion.identity);
 
     }
-   
+
+    
+    private void LandDustAnim()
+    {
+        if (rb.velocity.y < -7)
+        {
+            makeDust = true;
+        }
+        if (rb.velocity.y == 0 && IsGrounded && makeDust)
+        {   
+            
+            Instantiate(land , transform.position  , quaternion.identity);
+            makeDust = false;
+            
+        }
+        
+    }
+    
     public void ThrowSword()
     {
         if (throwSword )
@@ -189,7 +211,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-
+    
     private void AnimationArranger()
     {
         playerAnimator.SetBool("IsAlive",isAlive);
@@ -240,5 +262,8 @@ public class PlayerController : MonoBehaviour
     {
         isAlive = false;
     }
+
+  
+    
     
 }
