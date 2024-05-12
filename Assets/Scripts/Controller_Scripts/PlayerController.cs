@@ -19,29 +19,53 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckCollider;
     [SerializeField] private Transform jumpDustPos;
 
+    [SerializeField] GameObject rightAttackObject;
+    [SerializeField] GameObject leftAttackObject;
+   
+
     [SerializeField] LayerMask groundLayer;
     [SerializeField] private float groundCheckColliderRatio = 0.1f;
 
     [SerializeField]private int availableJumps = 2;
-    [SerializeField] bool IsGrounded = false;
+    [SerializeField] bool isGrounded = false;
+
+    public bool IsGrounded
+    {
+        get { return IsGrounded; }
+    }
     [SerializeField] GameObject sword;
     [SerializeField] float horizontalSpeed = 5f;
     private Animator playerAnimator;
+    
 
     bool facingRight = true;
+
+    public bool FacingRight
+    {
+        get{ return facingRight; }
+    }
+
     float horizontalValue;
 
+    public float HorizontalValue
+    {
+        get{ return horizontalValue; }
+    }
+
     bool melee = false;
+    bool airAttack = false;
     bool throwSword;
     bool jump = false;
     bool doubleJump = false;
     bool isAlive = true;
-    Vector3 landDustPos;
+
     [SerializeField]bool makeDust;
 
 
     [SerializeField] private GameObject dust;
     [SerializeField] private GameObject land;
+    [SerializeField] private GameObject walkDust;
+    
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
@@ -56,6 +80,9 @@ public class PlayerController : MonoBehaviour
             GetInputs();
             DirectionArranger();
             AnimationArranger();
+            // Attack();
+           
+
             
 
         }
@@ -73,6 +100,8 @@ public class PlayerController : MonoBehaviour
             JumpMovement();
             LandDustAnim();
             
+           
+            
         }
         
     }
@@ -87,14 +116,21 @@ public class PlayerController : MonoBehaviour
         //    isAlive = false;
         //}
         ////////////////////////
-        if (Input.GetKey(KeyCode.K))
-        {
+        if (Input.GetKeyDown(KeyCode.K))
+        { 
+            
             melee = true;
         }
-        if (Input.GetKeyUp(KeyCode.K))
+
+        if (Input.GetKeyDown(KeyCode.I) && !isGrounded)
         {
-            melee = false;
+            airAttack = true;
         }
+        if (Input.GetKeyUp(KeyCode.I))
+        {
+            airAttack = false;
+        }
+        
         if (Input.GetKeyDown(KeyCode.J))
         {
             throwSword = true;
@@ -112,19 +148,20 @@ public class PlayerController : MonoBehaviour
 
     private void GroundChecker()
     {
-        IsGrounded = false;
+        isGrounded = false;
 
         Collider2D[] collider2D = Physics2D.OverlapCircleAll(groundCheckCollider.position , groundCheckColliderRatio , groundLayer);
 
         if (collider2D.Length > 0 )
         {
-            IsGrounded = true;
+            isGrounded = true;
 
         }
     }
 
     private void HorizontalMovement(float dir)
     {
+        
         float xVal = dir * horizontalSpeed *100* Time.fixedDeltaTime;
         Vector2 targetVelocity = new Vector2(xVal,rb.velocity.y);
         rb.velocity = targetVelocity;
@@ -134,14 +171,14 @@ public class PlayerController : MonoBehaviour
 
     private void JumpMovement()
     {
-        if(!jump && IsGrounded)
+        if(!jump && isGrounded)
         {
             availableJumps = 2;
         }
         else if (jump)
         {
             
-            if (IsGrounded && availableJumps == 2)
+            if (isGrounded && availableJumps == 2)
             {
                 rb.velocity = Vector2.up * jumpPower;
                 doubleJump = true;
@@ -149,7 +186,7 @@ public class PlayerController : MonoBehaviour
                 JumpDustAnim();
                 
             }
-            else if (!IsGrounded && availableJumps == 2)
+            else if (!isGrounded && availableJumps == 2)
             {
                 rb.velocity = Vector2.up * jumpPower;
                 doubleJump = false;
@@ -179,14 +216,13 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    
     private void LandDustAnim()
     {
         if (rb.velocity.y < -7)
         {
             makeDust = true;
         }
-        if (rb.velocity.y == 0 && IsGrounded && makeDust)
+        if (rb.velocity.y == 0 && isGrounded && makeDust)
         {   
             
             Instantiate(land , transform.position  , quaternion.identity);
@@ -196,31 +232,71 @@ public class PlayerController : MonoBehaviour
         
     }
     
-    public void ThrowSword()
+    public void ThrowSwordEvent()
     {
         if (throwSword )
         {
             Instantiate(sword,transform.position,quaternion.identity);
-            
+            throwSword = false;
         }
         
     }
-    public void EndThrowSword()
+  
+    private void Attack()
     {
-        throwSword = false;
-        
-    }
+        if (melee)
+        {
+            if (facingRight)
+            {
+                rightAttackObject.SetActive(true);
+                
+            }
+            else if (!facingRight)
+            {
+                leftAttackObject.SetActive(true);
 
+            }
+            melee = false;
+            
+        }
+
+    }
     
+    public void AirAttackCheckerEvent()
+    {
+        airAttack = false;
+        
+
+    }
     private void AnimationArranger()
     {
-        playerAnimator.SetBool("IsAlive",isAlive);
-        playerAnimator.SetBool("IsJumping", !IsGrounded);
+        //playerAnimator.SetBool("IsAlive",isAlive);
+        playerAnimator.SetBool("IsJumping", !isGrounded);
         playerAnimator.SetFloat("yVelocity", rb.velocity.y);
-    
+
+
         
-        playerAnimator.SetBool("ThrowSword",throwSword);
+        playerAnimator.SetBool( "ThrowSword",throwSword );
         
+        if ( !isGrounded && airAttack  )
+        {
+
+            playerAnimator.SetBool("AirAttack", true);
+            
+
+        }
+        if( isGrounded || !airAttack )
+        {
+            airAttack = false;
+            playerAnimator.SetBool("AirAttack", false);
+        }
+     
+
+
+
+        
+
+        /*
         if (melee)
         {
             playerAnimator.SetBool("Melee", true);
@@ -230,6 +306,7 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetBool("Melee", false);
         }
+        */
         if (horizontalValue != 0)
         {
             playerAnimator.SetBool("IsRunning", true);
