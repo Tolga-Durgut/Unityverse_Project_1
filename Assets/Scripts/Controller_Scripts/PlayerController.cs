@@ -74,18 +74,15 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+            GetInputs();
         if (isAlive)
         {
 
-            GetInputs();
             DirectionArranger();
-            AnimationArranger();
-            // Attack();
+            Attack();
            
-
-            
-
         }
+            AnimationArranger();
 
         
         
@@ -93,9 +90,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+            GroundChecker();
         if (isAlive)
         {
-            GroundChecker();
             HorizontalMovement(horizontalValue);
             JumpMovement();
             LandDustAnim();
@@ -109,17 +106,25 @@ public class PlayerController : MonoBehaviour
     private void GetInputs()
     {
 
+
+        ///////// Test Scripti 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            isAlive = true;
+        } 
+        ////////
+
+
         horizontalValue = Input.GetAxisRaw("Horizontal");
-        //deneme scripti/////////
-        //if (Input.GetKey(KeyCode.Y))
-        //{
-        //    isAlive = false;
-        //}
-        ////////////////////////
+        
         if (Input.GetKeyDown(KeyCode.K))
         { 
             
             melee = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.K))
+        {
+            melee = false;
         }
 
         if (Input.GetKeyDown(KeyCode.I) && !isGrounded)
@@ -244,7 +249,7 @@ public class PlayerController : MonoBehaviour
   
     private void Attack()
     {
-        if (melee)
+        if (melee && isGrounded && horizontalValue == 0)
         {
             if (facingRight)
             {
@@ -256,7 +261,7 @@ public class PlayerController : MonoBehaviour
                 leftAttackObject.SetActive(true);
 
             }
-            melee = false;
+            
             
         }
 
@@ -270,7 +275,9 @@ public class PlayerController : MonoBehaviour
     }
     private void AnimationArranger()
     {
-        //playerAnimator.SetBool("IsAlive",isAlive);
+        
+        
+        playerAnimator.SetBool("IsAlive",isAlive);
         playerAnimator.SetBool("IsJumping", !isGrounded);
         playerAnimator.SetFloat("yVelocity", rb.velocity.y);
 
@@ -292,11 +299,7 @@ public class PlayerController : MonoBehaviour
         }
      
 
-
-
         
-
-        /*
         if (melee)
         {
             playerAnimator.SetBool("Melee", true);
@@ -306,7 +309,7 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetBool("Melee", false);
         }
-        */
+        
         if (horizontalValue != 0)
         {
             playerAnimator.SetBool("IsRunning", true);
@@ -338,6 +341,15 @@ public class PlayerController : MonoBehaviour
     private void Death()
     {
         isAlive = false;
+        
+    }
+
+    void OnCollisionEnter2D(Collision2D other) 
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            Death();
+        }
     }
 
   
