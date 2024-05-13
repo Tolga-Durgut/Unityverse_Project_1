@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] GameObject rightAttackObject;
     [SerializeField] GameObject leftAttackObject;
+    [SerializeField] GameObject airAttackObject;
    
 
     [SerializeField] LayerMask groundLayer;
@@ -53,7 +54,6 @@ public class PlayerController : MonoBehaviour
     }
 
     bool melee = false;
-    bool airAttack = false;
     bool throwSword;
     bool jump = false;
     bool doubleJump = false;
@@ -79,7 +79,8 @@ public class PlayerController : MonoBehaviour
         {
 
             DirectionArranger();
-            Attack();
+            MeleeAttack();
+
            
         }
             AnimationArranger();
@@ -127,15 +128,7 @@ public class PlayerController : MonoBehaviour
             melee = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.I) && !isGrounded)
-        {
-            airAttack = true;
-        }
-        if (Input.GetKeyUp(KeyCode.I))
-        {
-            airAttack = false;
-        }
-        
+       
         if (Input.GetKeyDown(KeyCode.J))
         {
             throwSword = true;
@@ -247,19 +240,28 @@ public class PlayerController : MonoBehaviour
         
     }
   
-    private void Attack()
+    private void MeleeAttack()
     {
         if (melee && isGrounded && horizontalValue == 0)
         {
             if (facingRight)
             {
+                if (leftAttackObject.activeSelf)
+                {
+                    leftAttackObject.SetActive(false);
+                }
+                
                 rightAttackObject.SetActive(true);
                 
             }
             else if (!facingRight)
             {
-                leftAttackObject.SetActive(true);
+                if (!rightAttackObject.activeSelf)
+                {
+                    rightAttackObject.SetActive(false);
+                }
 
+                leftAttackObject.SetActive(true);
             }
             
             
@@ -267,12 +269,7 @@ public class PlayerController : MonoBehaviour
 
     }
     
-    public void AirAttackCheckerEvent()
-    {
-        airAttack = false;
-        
-
-    }
+   
     private void AnimationArranger()
     {
         
@@ -285,19 +282,7 @@ public class PlayerController : MonoBehaviour
         
         playerAnimator.SetBool( "ThrowSword",throwSword );
         
-        if ( !isGrounded && airAttack  )
-        {
-
-            playerAnimator.SetBool("AirAttack", true);
-            
-
-        }
-        if( isGrounded || !airAttack )
-        {
-            airAttack = false;
-            playerAnimator.SetBool("AirAttack", false);
-        }
-     
+       
 
         
         if (melee)

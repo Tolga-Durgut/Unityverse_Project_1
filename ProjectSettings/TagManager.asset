@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Sword
   - Enemy
+  - MeleeAttack
+  - AirAttack
   layers:
   - Default
   - TransparentFX

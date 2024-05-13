@@ -10421,18 +10421,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeleeAttackRight
       objectReference: {fileID: 0}
-    - target: {fileID: 7630382148875162119, guid: a43c829a3506c407ca8d9abf503b4a96, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8404579944272281054, guid: a43c829a3506c407ca8d9abf503b4a96, type: 3}
-      propertyPath: m_Size.x
-      value: 1.4941292
-      objectReference: {fileID: 0}
-    - target: {fileID: 8404579944272281054, guid: a43c829a3506c407ca8d9abf503b4a96, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.2893405
-      objectReference: {fileID: 0}
     - target: {fileID: 8573344248542255190, guid: a43c829a3506c407ca8d9abf503b4a96, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.354
@@ -11445,6 +11433,7 @@ MonoBehaviour:
   jumpDustPos: {fileID: 1132580169}
   rightAttackObject: {fileID: 88368665}
   leftAttackObject: {fileID: 857789082}
+  airAttackObject: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -13344,18 +13333,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1005010091}
     m_Modifications:
-    - target: {fileID: 125363943785566699, guid: f96da66cd0caf4a7a838fe4a3962c703, type: 3}
-      propertyPath: m_Size.x
-      value: 1.4344397
-      objectReference: {fileID: 0}
-    - target: {fileID: 125363943785566699, guid: f96da66cd0caf4a7a838fe4a3962c703, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.25949574
-      objectReference: {fileID: 0}
-    - target: {fileID: 125363943785566699, guid: f96da66cd0caf4a7a838fe4a3962c703, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.060952246
-      objectReference: {fileID: 0}
     - target: {fileID: 5073932380366837667, guid: f96da66cd0caf4a7a838fe4a3962c703, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.354
@@ -13399,10 +13376,6 @@ PrefabInstance:
     - target: {fileID: 8110513582595497559, guid: f96da66cd0caf4a7a838fe4a3962c703, type: 3}
       propertyPath: m_Name
       value: MeleeAttackLeft
-      objectReference: {fileID: 0}
-    - target: {fileID: 8699673119985401018, guid: f96da66cd0caf4a7a838fe4a3962c703, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
