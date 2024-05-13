@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-            GroundChecker();
+        GroundChecker();
         if (isAlive)
         {
             HorizontalMovement(horizontalValue);
@@ -132,18 +132,18 @@ public class PlayerController : MonoBehaviour
             downKey = false;
         }
         
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.J))
         { 
             
             melee = true;
         }
-        else if (Input.GetKeyUp(KeyCode.K))
+        else if (Input.GetKeyUp(KeyCode.J))
         {
             melee = false;
         }
 
        
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             throwSword = true;
         }
@@ -260,30 +260,22 @@ public class PlayerController : MonoBehaviour
         {
             if (facingRight)
             {
-                if (leftAttackObject.activeSelf)
-                {
-                    leftAttackObject.SetActive(false);
-                }
-                
+            
                 rightAttackObject.SetActive(true);
                 
             }
             else if (!facingRight)
             {
-                if (!rightAttackObject.activeSelf)
-                {
-                    rightAttackObject.SetActive(false);
-                }
 
                 leftAttackObject.SetActive(true);
             }
             
             
         }
+       
 
     }
-    
-   
+
     private void AnimationArranger()
     {
         
@@ -291,7 +283,7 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("IsAlive",isAlive);
         playerAnimator.SetBool("IsJumping", !isGrounded);
         playerAnimator.SetFloat("yVelocity", rb.velocity.y);
-
+        
 
         
         playerAnimator.SetBool( "ThrowSword",throwSword );
