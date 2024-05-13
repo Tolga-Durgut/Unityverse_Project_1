@@ -43,7 +43,11 @@ public class SwordController : MonoBehaviour
         {
 
             movementFlag = false;
-            if (playerController.PlayerSpriteRenderer.flipX == false)
+            if (playerController.DownKey == true)
+            {
+                rb.velocity = Vector2.down * throwForce *100* Time.fixedDeltaTime ;
+            }
+            else if (playerController.PlayerSpriteRenderer.flipX == false)
             {
                 
                 rb.velocity = Vector2.right * throwForce *100* Time.fixedDeltaTime ;

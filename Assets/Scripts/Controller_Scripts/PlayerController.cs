@@ -55,6 +55,12 @@ public class PlayerController : MonoBehaviour
 
     bool melee = false;
     bool throwSword;
+    bool downKey;
+
+    public bool DownKey
+    {
+        get{ return downKey; }
+    }
     bool jump = false;
     bool doubleJump = false;
     bool isAlive = true;
@@ -117,6 +123,14 @@ public class PlayerController : MonoBehaviour
 
 
         horizontalValue = Input.GetAxisRaw("Horizontal");
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            downKey = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            downKey = false;
+        }
         
         if (Input.GetKeyDown(KeyCode.K))
         { 
