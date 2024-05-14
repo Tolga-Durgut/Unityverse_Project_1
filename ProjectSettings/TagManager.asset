@@ -9,6 +9,7 @@ TagManager:
   - MeleeAttack
   - AirAttack
   - EnemyAttack
+  - Platform
   layers:
   - Default
   - TransparentFX
