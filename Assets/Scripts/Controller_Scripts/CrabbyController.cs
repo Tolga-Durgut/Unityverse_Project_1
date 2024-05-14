@@ -10,6 +10,7 @@ public class CrabbyController : MonoBehaviour
     bool attack;
     bool damage = false;
     bool isAlive = true;
+    bool isAttackable = true;
     [SerializeField] GameObject crabbyAttackAnimObject;
     Collider2D col;
 
@@ -25,12 +26,14 @@ public class CrabbyController : MonoBehaviour
     {
         AnimationArranger();
         Death();
+        Debug.Log(health);
     }
 
     #region AttackCycleCode
     void StartAnticipation()
     {
 
+       isAttackable = false; 
        StartCoroutine(waitForAnticipation());
 
     }
@@ -58,6 +61,7 @@ public class CrabbyController : MonoBehaviour
     {
         anticipation = false;
         attack = false;
+        isAttackable = true;
         crabbyAttackAnimObject.SetActive(false);
     }
     #endregion 
@@ -73,7 +77,7 @@ public class CrabbyController : MonoBehaviour
         if (health == 0)
         {
             isAlive = false;
-            col.enabled = false;
+            
 
         }
     }
@@ -95,7 +99,7 @@ public class CrabbyController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) 
     {
         
-        if (other.gameObject.tag == "MeleeAttack")
+        if (other.gameObject.tag == "MeleeAttack" && isAttackable)
         {
             damage = true;
         }
