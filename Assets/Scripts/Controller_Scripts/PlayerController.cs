@@ -337,7 +337,15 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) 
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" )
+        {
+            Death();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other) 
+    {
+        if ( other.gameObject.tag == "EnemyAttack" )
         {
             Death();
         }

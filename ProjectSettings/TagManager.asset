@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - MeleeAttack
   - AirAttack
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX
