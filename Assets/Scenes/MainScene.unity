@@ -11170,7 +11170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7737cba77b5f44eb0a6df5763165f5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloudSpeed: 1
+  cloudSpeed: 0.8
   leftTarget: -23
   rightTarget: 33
 --- !u!212 &374062816
@@ -11502,7 +11502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7737cba77b5f44eb0a6df5763165f5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloudSpeed: 1
+  cloudSpeed: 0.8
   leftTarget: -23
   rightTarget: 33
 --- !u!4 &580229110 stripped
@@ -11869,6 +11869,10 @@ GameObject:
   - component: {fileID: 670372440}
   - component: {fileID: 670372439}
   - component: {fileID: 670372438}
+  - component: {fileID: 670372444}
+  - component: {fileID: 670372441}
+  - component: {fileID: 670372443}
+  - component: {fileID: 670372442}
   m_Layer: 0
   m_Name: StarFish
   m_TagString: Enemy
@@ -11964,6 +11968,125 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &670372441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670372437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 182c5770b59774c4897db4087f08bd5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &670372442
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670372437}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.009613365, y: -0.031243682}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.0625, y: 0.9375}
+    newSize: {x: 1.0625, y: 0.9375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.84139127, y: 0.29820752}
+  m_EdgeRadius: 0
+--- !u!58 &670372443
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670372437}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.0360502}
+  serializedVersion: 2
+  m_Radius: 0.3798386
+--- !u!50 &670372444
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670372437}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!4 &678398393 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4547498095624669537, guid: 38b80f938c2d247a9b7fdded10e8e99e, type: 3}
@@ -12381,7 +12504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7737cba77b5f44eb0a6df5763165f5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloudSpeed: 1
+  cloudSpeed: 0.8
   leftTarget: -23
   rightTarget: 33
 --- !u!212 &949834295
@@ -14477,7 +14600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7737cba77b5f44eb0a6df5763165f5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloudSpeed: 1
+  cloudSpeed: 0.8
   leftTarget: -23
   rightTarget: 33
 --- !u!212 &1707618728
@@ -16140,6 +16263,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1696465429}
     m_Modifications:
+    - target: {fileID: 194229230047076705, guid: a2f4c7b0f1606469281965bda40c98e4, type: 3}
+      propertyPath: cloudSpeed
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 194229230047076705, guid: a2f4c7b0f1606469281965bda40c98e4, type: 3}
+      propertyPath: leftTarget
+      value: -23
+      objectReference: {fileID: 0}
+    - target: {fileID: 194229230047076705, guid: a2f4c7b0f1606469281965bda40c98e4, type: 3}
+      propertyPath: rightTarget
+      value: 33
+      objectReference: {fileID: 0}
     - target: {fileID: 1381219185128659943, guid: a2f4c7b0f1606469281965bda40c98e4, type: 3}
       propertyPath: m_Name
       value: Big Clouds (2)

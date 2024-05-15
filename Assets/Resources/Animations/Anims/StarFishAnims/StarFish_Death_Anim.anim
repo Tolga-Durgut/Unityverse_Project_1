@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StarFish_Idle
+  m_Name: StarFish_Death_Anim
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,21 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: ab1ccf5738f2341cdb005eb4f2e6acaa, type: 3}
+      value: {fileID: 21300000, guid: bc3f37820351b47b499ce264f19332a9, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 64b8059b36d034ea288423de32c0b41c, type: 3}
+      value: {fileID: 21300000, guid: 80d24e48d7d8a4758b34507cf536305c, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 5aab87df76ef34c899b917ca26e70d32, type: 3}
+      value: {fileID: 21300000, guid: de93682963a5c4f9ab9729a241b75055, type: 3}
     - time: 0.25
-      value: {fileID: 21300000, guid: c5c2922c283fb4b55a37bb5585a47480, type: 3}
-    - time: 0.33333334
-      value: {fileID: 21300000, guid: e1ab4f0a0286543b780a48bdddcb588b, type: 3}
-    - time: 0.41666666
-      value: {fileID: 21300000, guid: 87cc0a6c2bda1407a87350be5333a20d, type: 3}
-    - time: 0.5
-      value: {fileID: 21300000, guid: 816317f1998bb41fe800143067cf4a36, type: 3}
-    - time: 0.5833333
-      value: {fileID: 21300000, guid: c14195f45f4eb49d6a090faaa8eb1bcd, type: 3}
+      value: {fileID: 21300000, guid: 60e61c66c227644cfac1af5be7ac9d27, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -58,20 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: ab1ccf5738f2341cdb005eb4f2e6acaa, type: 3}
-    - {fileID: 21300000, guid: 64b8059b36d034ea288423de32c0b41c, type: 3}
-    - {fileID: 21300000, guid: 5aab87df76ef34c899b917ca26e70d32, type: 3}
-    - {fileID: 21300000, guid: c5c2922c283fb4b55a37bb5585a47480, type: 3}
-    - {fileID: 21300000, guid: e1ab4f0a0286543b780a48bdddcb588b, type: 3}
-    - {fileID: 21300000, guid: 87cc0a6c2bda1407a87350be5333a20d, type: 3}
-    - {fileID: 21300000, guid: 816317f1998bb41fe800143067cf4a36, type: 3}
-    - {fileID: 21300000, guid: c14195f45f4eb49d6a090faaa8eb1bcd, type: 3}
+    - {fileID: 21300000, guid: bc3f37820351b47b499ce264f19332a9, type: 3}
+    - {fileID: 21300000, guid: 80d24e48d7d8a4758b34507cf536305c, type: 3}
+    - {fileID: 21300000, guid: de93682963a5c4f9ab9729a241b75055, type: 3}
+    - {fileID: 21300000, guid: 60e61c66c227644cfac1af5be7ac9d27, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6666666
+    m_StopTime: 0.33333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -90,11 +78,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.5833333
-    functionName: AnticipationEvent
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CloudController : MonoBehaviour
+public class CloudParallaxController : MonoBehaviour
 {
     [SerializeField] private float cloudSpeed = 2f;
     [SerializeField]float leftTarget;
