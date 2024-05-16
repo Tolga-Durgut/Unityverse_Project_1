@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
 
         Collider2D[] collider2D = Physics2D.OverlapCircleAll(groundCheckCollider.position , groundCheckColliderRatio , groundLayer);
 
-        
+
 
         if (collider2D.Length > 0 )
         {
@@ -339,7 +339,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) 
     {
-        if (other.gameObject.tag == "Enemy" )
+        if (other.gameObject.tag == "Enemy"  || other.gameObject.tag == "EnemyAttack")
         {
             Death();
         }
@@ -347,7 +347,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) 
     {
-        if ( other.gameObject.tag == "EnemyAttack" )
+        if ( other.gameObject.tag == "EnemyAttack" || other.gameObject.tag == "Enemy" )
         {
             Death();
         }
