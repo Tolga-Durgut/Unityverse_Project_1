@@ -31,7 +31,7 @@ public class SwordController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.gameObject.tag != "Player"   &&  other.gameObject.tag != "Sword")
+        if (other.gameObject.tag != "Player"   &&  other.gameObject.tag != "Sword" && other.gameObject.tag != "Platform")
         {
             Destroy(this.gameObject);
         }
