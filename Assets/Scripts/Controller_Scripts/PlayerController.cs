@@ -66,8 +66,6 @@ public class PlayerController : MonoBehaviour
     bool isAlive = true;
 
     [SerializeField]bool makeDust;
-
-
     [SerializeField] private GameObject dust;
     [SerializeField] private GameObject land;
     [SerializeField] private GameObject walkDust;
@@ -331,9 +329,18 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private void Death()
+    private void Death(Vector3 DeathDirection)
     {
         isAlive = false;
+
+        if (DeathDirection.x < transform.position.x)
+        {
+            rb.velocity = new Vector2(1,1) * jumpPower;
+        }
+        else
+        {
+            rb.velocity = new Vector2(-1,1) * jumpPower;
+        }
         
     }
 
@@ -341,7 +348,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy"  || other.gameObject.tag == "EnemyAttack")
         {
-            Death();
+
+            Death(other.transform.position);
         }
     }
 
@@ -349,7 +357,7 @@ public class PlayerController : MonoBehaviour
     {
         if ( other.gameObject.tag == "EnemyAttack" )
         {
-            Death();
+            Death(other.transform.position);
         }
     }
 

@@ -10,6 +10,7 @@ TagManager:
   - AirAttack
   - EnemyAttack
   - Platform
+  - Cannon
   layers:
   - Default
   - TransparentFX

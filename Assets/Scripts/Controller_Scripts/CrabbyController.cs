@@ -14,7 +14,7 @@ public class CrabbyController : MonoBehaviour
     [SerializeField] GameObject crabbyAttackAnimObject;
     Collider2D col;
 
-    int health = 4;
+    int health = 2;
    
     void Start()
     {
@@ -77,7 +77,7 @@ public class CrabbyController : MonoBehaviour
         if (health == 0)
         {
             isAlive = false;
-            
+           
 
         }
     }
@@ -96,13 +96,14 @@ public class CrabbyController : MonoBehaviour
 
 
 
-    void OnTriggerEnter2D(Collider2D other) 
+
+    void OnTriggerStay2D(Collider2D other)
     {
-        
         if (other.gameObject.tag == "MeleeAttack" && isAttackable)
         {
             damage = true;
         }
+        
     }
    
 

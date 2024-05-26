@@ -27,7 +27,7 @@ public class CannonBallController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.gameObject.tag != "Enemy" && other.gameObject.tag != "Sword")
+        if (other.gameObject.tag != "Cannon" && other.gameObject.tag != "Sword")
         {
             Destroy(this.gameObject);
             
