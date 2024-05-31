@@ -80,6 +80,7 @@ public class CrabbyController : MonoBehaviour
     void Death()
     {
         isAlive = false;
+        col.enabled = false;
     }
 
 

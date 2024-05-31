@@ -109,6 +109,14 @@ public class StarFishController : MonoBehaviour
         col.enabled = false;
     }
 
+    void RebornEvent()
+    {
+        col.enabled = true;
+        attack = false;
+        anticipation = false;
+        isAlive = true;
+    }
+
 
     IEnumerator waitForAttack()
     {

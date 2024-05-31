@@ -141,13 +141,13 @@ public class PlayerController : MonoBehaviour
         }
 
        
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K) && isAlive)
         {
             throwSword = true;
         }
        
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isAlive)
         {
             jump = true;
         }
