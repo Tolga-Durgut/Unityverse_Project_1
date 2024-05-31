@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6227390647287004506}
   - component: {fileID: 7341095694300683000}
   - component: {fileID: 1674272984653337272}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DownSword
   m_TagString: DownSword
   m_Icon: {fileID: 0}
