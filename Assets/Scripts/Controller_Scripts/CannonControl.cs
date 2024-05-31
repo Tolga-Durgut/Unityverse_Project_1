@@ -8,6 +8,7 @@ public class CannonControl : MonoBehaviour
     bool fire;
     [SerializeField] GameObject cannonBall;
     SpriteRenderer spriteRenderer;
+    
     void Start()
     {
         animator = GetComponent<Animator>();

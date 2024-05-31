@@ -8,13 +8,12 @@ public class CrabbyController : MonoBehaviour
     Animator animator;
     bool anticipation;
     bool attack;
-    bool damage = false;
     bool isAlive = true;
     bool isAttackable = true;
     [SerializeField] GameObject crabbyAttackAnimObject;
     Collider2D col;
 
-    int health = 2;
+
    
     void Start()
     {
@@ -25,15 +24,12 @@ public class CrabbyController : MonoBehaviour
     void Update()
     {
         AnimationArranger();
-        Death();
-        Debug.Log(health);
     }
 
     #region AttackCycleCode
     void StartAnticipation()
     {
 
-       isAttackable = false; 
        StartCoroutine(waitForAnticipation());
 
     }
@@ -42,8 +38,9 @@ public class CrabbyController : MonoBehaviour
         StartCoroutine(waitForAttack());
     }
     IEnumerator waitForAnticipation()
-    {
+    {   
         yield return new WaitForSeconds(0.5f);
+        
         anticipation= true;
     }
     IEnumerator waitForAttack()
@@ -54,6 +51,7 @@ public class CrabbyController : MonoBehaviour
 
     public void AttackAnimEvent()
     {
+        isAttackable = false;
         crabbyAttackAnimObject.SetActive(true);
     }
 
@@ -66,21 +64,7 @@ public class CrabbyController : MonoBehaviour
     }
     #endregion 
 
-    public void TakeDamageEvent()
-    {
-        damage = false;
-        health --;
-        
-    }
-    void Death()
-    {
-        if (health == 0)
-        {
-            isAlive = false;
-           
-
-        }
-    }
+   
 
 
     void AnimationArranger()
@@ -91,9 +75,12 @@ public class CrabbyController : MonoBehaviour
         }
         animator.SetBool("Anticipation" , anticipation);
         animator.SetBool("Attack" , attack);
-        animator.SetBool("Damage" , damage);
     }
 
+    void Death()
+    {
+        isAlive = false;
+    }
 
 
 
@@ -101,7 +88,7 @@ public class CrabbyController : MonoBehaviour
     {
         if (other.gameObject.tag == "MeleeAttack" && isAttackable)
         {
-            damage = true;
+            Death();
         }
         
     }

@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
         get { return playerSpriteRenderer; }
     }
     [SerializeField] public Rigidbody2D rb;
-    
+    [SerializeField] private Transform spawnPoint;
     [SerializeField] private float jumpPower = 500f;      
     [SerializeField] private Transform groundCheckCollider;
     [SerializeField] private Transform jumpDustPos;
@@ -341,8 +341,20 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(-1,1) * jumpPower;
         }
+        StartCoroutine(Spawn());
+
+        
+
         
     }
+
+    IEnumerator Spawn()
+    {
+        yield return new WaitForSeconds(0.75f);
+        transform.position = spawnPoint.position;
+        isAlive = true;
+    }
+
 
     void OnCollisionEnter2D(Collision2D other) 
     {

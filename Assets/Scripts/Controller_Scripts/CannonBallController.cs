@@ -5,11 +5,13 @@ using UnityEngine;
 public class CannonBallController : MonoBehaviour
 {
     Rigidbody2D rb;
+  
     [SerializeField] float cannonBallSpeed;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
 
@@ -21,7 +23,9 @@ public class CannonBallController : MonoBehaviour
 
     void Move()
     {
-        rb.velocity = new Vector2 (-cannonBallSpeed * 100 * Time.fixedDeltaTime, rb.velocity.y);
+        
+            rb.velocity = new Vector2 (-cannonBallSpeed * 100 * Time.fixedDeltaTime, rb.velocity.y);
+
     }
 
 

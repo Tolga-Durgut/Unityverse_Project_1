@@ -8,10 +8,15 @@ public class StarFishController : MonoBehaviour
     Animator animator;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
+    Collider2D col ;
 
     bool attack;
     bool anticipation;
     bool facingRight;
+
+    bool isAttackable;
+    bool isAlive = true;
+    bool damage;
 
     float attackSpeed = 7;
     void Start()
@@ -19,6 +24,7 @@ public class StarFishController : MonoBehaviour
         animator = GetComponent<Animator>();   
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
 
     }
 
@@ -26,11 +32,18 @@ public class StarFishController : MonoBehaviour
     void Update()
     {
         AnimationArranger();
+      
     }
 
     void FixedUpdate()
     {
-        Attack();
+        if (isAlive)
+        {
+            
+            Attack();
+        }
+       
+
     }
 
 
@@ -38,6 +51,7 @@ public class StarFishController : MonoBehaviour
     {
         animator.SetBool("Attack", attack);
         animator.SetBool("Anticipation",anticipation);
+        animator.SetBool("isAlive", isAlive );
 
     }
 
@@ -59,12 +73,14 @@ public class StarFishController : MonoBehaviour
     void AnticipationEvent()
     {
         anticipation = true;
+        
     }
     
     void AttackEvent()
     {
         
         StartCoroutine(waitForAttack());
+        
     }
     void Attack()
     {
@@ -73,6 +89,8 @@ public class StarFishController : MonoBehaviour
             if (facingRight)
             {
                 rb.velocity = new Vector2(attackSpeed *100* Time.fixedDeltaTime, rb.velocity.y);
+
+
             }
             else
             {
@@ -83,22 +101,44 @@ public class StarFishController : MonoBehaviour
         }
     }
 
+ 
+
+    void DeathEvent()
+    {
+        isAlive = false;
+        col.enabled = false;
+    }
+
+
     IEnumerator waitForAttack()
     {
         yield return new WaitForSeconds(0.5f);
         attack = true;
         anticipation = false;
-        
+        isAttackable = false;
     }
+    
+
     void OnTriggerEnter2D(Collider2D other) 
     {
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Sword" && other.gameObject.tag != "MeleeAttack" && isAlive )
+        {
+            attack = false;
+            anticipation = false;
+            isAttackable = true;
+            DirectionArranger();
+        }
+
+        if (other.gameObject.tag == "Sword" && isAttackable == true)
+        {
+            DeathEvent();
+        }
         
-        attack = false;
-        anticipation = false;
+        
 
-        DirectionArranger();
+        
     }
-
+    
 
     
 
