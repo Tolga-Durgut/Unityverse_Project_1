@@ -7,15 +7,17 @@ public class SharkController : MonoBehaviour
     Animator animator;
     Rigidbody2D rb;
     Collider2D col;
+    PlayerController playerController;
     [SerializeField] Collider2D playerCollider; // Player'ın collider'ı
     [SerializeField] private float jumpPower = 7f; 
 
 
     bool jump;
     bool isAlive = true;
-
+    
     void Start()
     {
+        playerController= GameObject.Find("Player").GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
@@ -25,6 +27,10 @@ public class SharkController : MonoBehaviour
     {
         AnimationArranger();
 
+        if (!isAlive && !playerController.IsAlive)
+        {
+            StartCoroutine(waitforReborn());
+        }
     }
 
 
@@ -50,11 +56,10 @@ public class SharkController : MonoBehaviour
         
         animator.SetBool("Jump", jump);
         animator.SetFloat("yVelocity", rb.velocity.y);
-        if (!isAlive)
-        {
+        
 
-        animator.SetBool("IsAlive", false);
-        }
+        animator.SetBool("IsAlive", isAlive);
+        
         
         
     }
@@ -64,6 +69,20 @@ public class SharkController : MonoBehaviour
         isAlive = false;
         Physics2D.IgnoreCollision(col, playerCollider, true);
         
+    }
+
+    void Reborn()
+    {
+        Physics2D.IgnoreCollision(col, playerCollider, false);
+        
+        jump = true;
+        Jump();
+        isAlive = true;
+    }
+    IEnumerator waitforReborn()
+    {
+        yield return new WaitForSeconds(0.75f);
+        Reborn();
     }
     
 

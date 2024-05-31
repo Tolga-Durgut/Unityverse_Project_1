@@ -19631,6 +19631,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &227904764 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5313535741237287479, guid: d284d3e676e7b4bf8b63705b13a44130, type: 3}
+  m_PrefabInstance: {fileID: 7564892066687115434}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &230320431
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23532,7 +23537,7 @@ GameObject:
   - component: {fileID: 862385462}
   - component: {fileID: 862385461}
   m_Layer: 7
-  m_Name: Shark (2)
+  m_Name: "\xC7\u0131lg\u0131nSharky3"
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23701,6 +23706,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1993128746}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &883767325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 883767326}
+  m_Layer: 0
+  m_Name: Platforms
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &883767326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883767325}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 55.618404, y: -1.1554781, z: -0.2282148}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 227904764}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &884506248
 GameObject:
@@ -24982,7 +25019,7 @@ Transform:
   m_GameObject: {fileID: 1005010089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.32, y: -2.36, z: 0}
+  m_LocalPosition: {x: 19.9, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -30852,7 +30889,7 @@ GameObject:
   - component: {fileID: 1517493377}
   - component: {fileID: 1517493379}
   m_Layer: 7
-  m_Name: Shark
+  m_Name: "\xC7\u0131lg\u0131nSharky"
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32098,7 +32135,7 @@ GameObject:
   - component: {fileID: 1790939430}
   - component: {fileID: 1790939429}
   m_Layer: 7
-  m_Name: Shark (1)
+  m_Name: "\xC7\u0131lg\u0131nSharky2"
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36365,7 +36402,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 883767326}
     m_Modifications:
     - target: {fileID: 3359288216404771186, guid: d284d3e676e7b4bf8b63705b13a44130, type: 3}
       propertyPath: m_Layer
@@ -36381,15 +36418,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5313535741237287479, guid: d284d3e676e7b4bf8b63705b13a44130, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.53
+      value: -31.088404
       objectReference: {fileID: 0}
     - target: {fileID: 5313535741237287479, guid: d284d3e676e7b4bf8b63705b13a44130, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.41
+      value: 5.565478
       objectReference: {fileID: 0}
     - target: {fileID: 5313535741237287479, guid: d284d3e676e7b4bf8b63705b13a44130, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.47236717
+      value: 0.70058197
       objectReference: {fileID: 0}
     - target: {fileID: 5313535741237287479, guid: d284d3e676e7b4bf8b63705b13a44130, type: 3}
       propertyPath: m_LocalRotation.w
@@ -36397,15 +36434,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5313535741237287479, guid: d284d3e676e7b4bf8b63705b13a44130, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5313535741237287479, guid: d284d3e676e7b4bf8b63705b13a44130, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5313535741237287479, guid: d284d3e676e7b4bf8b63705b13a44130, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5313535741237287479, guid: d284d3e676e7b4bf8b63705b13a44130, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -36526,7 +36563,6 @@ SceneRoots:
   - {fileID: 11657848}
   - {fileID: 137756343}
   - {fileID: 1683763688}
-  - {fileID: 7564892066687115434}
   - {fileID: 1708900383}
   - {fileID: 365484031}
   - {fileID: 291679742}
@@ -36535,3 +36571,4 @@ SceneRoots:
   - {fileID: 1986293518}
   - {fileID: 1854388489}
   - {fileID: 1993128746}
+  - {fileID: 883767326}

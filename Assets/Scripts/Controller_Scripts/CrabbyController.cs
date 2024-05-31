@@ -6,6 +6,7 @@ public class CrabbyController : MonoBehaviour
 {
     
     Animator animator;
+    PlayerController playerController;
     bool anticipation;
     bool attack;
     bool isAlive = true;
@@ -17,12 +18,18 @@ public class CrabbyController : MonoBehaviour
    
     void Start()
     {
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
        animator = GetComponent<Animator>();
        col = GetComponent<Collider2D>();
     }
 
     void Update()
     {
+        if(!isAlive && !playerController.IsAlive)
+        {
+            StartCoroutine(waitForReborn());
+            
+        }
         AnimationArranger();
     }
 
@@ -69,10 +76,9 @@ public class CrabbyController : MonoBehaviour
 
     void AnimationArranger()
     {
-        if (!isAlive)
-        {
-            animator.SetBool("IsAlive",false);
-        }
+        
+        animator.SetBool("IsAlive",isAlive);
+        
         animator.SetBool("Anticipation" , anticipation);
         animator.SetBool("Attack" , attack);
     }
@@ -81,6 +87,21 @@ public class CrabbyController : MonoBehaviour
     {
         isAlive = false;
         col.enabled = false;
+    }
+
+    void Reborn()
+    {
+        attack = false;
+        anticipation = false;
+        col.enabled = true;
+        isAlive = true;
+
+    }
+
+    IEnumerator waitForReborn()
+    {
+        yield return new WaitForSeconds(0.75f);
+        Reborn();
     }
 
 

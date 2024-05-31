@@ -15,11 +15,13 @@ public class StarFishController : MonoBehaviour
 
     bool isAttackable;
     bool isAlive = true;
-    bool damage;
+    
+    PlayerController playerController;
 
     float attackSpeed = 7;
     void Start()
     {
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         animator = GetComponent<Animator>();   
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -30,7 +32,13 @@ public class StarFishController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isAlive && !playerController.IsAlive )
+        {
+            
+            StartCoroutine(waitForReborn());
+        }
         AnimationArranger();
+
       
     }
 
@@ -107,8 +115,12 @@ public class StarFishController : MonoBehaviour
         isAlive = false;
         col.enabled = false;
     }
-
-    void RebornEvent()
+    IEnumerator waitForReborn()
+    {
+        yield return new WaitForSeconds(0.75f);
+        Reborn();
+    }
+    void Reborn()
     {
         col.enabled = true;
         attack = false;

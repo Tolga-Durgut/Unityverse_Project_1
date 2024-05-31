@@ -66,6 +66,11 @@ public class PlayerController : MonoBehaviour
     bool doubleJump = false;
     bool isAlive = true;
 
+    public bool IsAlive
+    {
+        get{ return isAlive; }
+    }
+
     [SerializeField]bool makeDust;
     [SerializeField] private GameObject dust;
     [SerializeField] private GameObject land;
@@ -114,10 +119,10 @@ public class PlayerController : MonoBehaviour
 
 
         ///////// Test Scripti 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            isAlive = true;
-        } 
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    isAlive = true;
+        //} 
         ////////
 
 
