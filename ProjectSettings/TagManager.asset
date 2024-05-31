@@ -11,6 +11,8 @@ TagManager:
   - EnemyAttack
   - Platform
   - Cannon
+  - Ground
+  - DownSword
   layers:
   - Default
   - TransparentFX

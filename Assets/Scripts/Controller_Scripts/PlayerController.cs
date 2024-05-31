@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject rightAttackObject;
     [SerializeField] GameObject leftAttackObject;
     [SerializeField] GameObject airAttackObject;
+    [SerializeField] GameObject downSword;
    
 
     [SerializeField] LayerMask groundLayer;
@@ -246,11 +247,19 @@ public class PlayerController : MonoBehaviour
     
     public void ThrowSwordEvent()
     {
-        if (throwSword )
+        if(throwSword && downKey)
+        {
+            Instantiate(downSword,transform.position,quaternion.identity);
+            throwSword = false;
+        }
+        else if (throwSword )
         {
             Instantiate(sword,transform.position,quaternion.identity);
             throwSword = false;
         }
+        
+
+
         
     }
   

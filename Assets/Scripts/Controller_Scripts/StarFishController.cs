@@ -9,7 +9,6 @@ public class StarFishController : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
     Collider2D col ;
-
     bool attack;
     bool anticipation;
     bool facingRight;

@@ -64,9 +64,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Anticipation
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: Damage
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6049535519616203241}
   m_Solo: 0
@@ -352,7 +349,7 @@ AnimatorStateMachine:
     m_Position: {x: 250, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6690199843126896778}
-    m_Position: {x: 260, y: -10, z: 0}
+    m_Position: {x: 250, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -478509121824827062}
     m_Position: {x: 250, y: -120, z: 0}
